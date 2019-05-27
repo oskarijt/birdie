@@ -6,10 +6,16 @@ import android.view.Menu
 import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import android.widget.TextView
-import kotlinx.android.synthetic.main.activity_add_bird.*
+import androidx.lifecycle.LiveData
+import androidx.recyclerview.widget.RecyclerView
+
+
 
 class MainActivity : AppCompatActivity() {
+
+
+    private lateinit var recyclerView: RecyclerView
+    private var birds : LiveData<List<BirdModel>> ? = null
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -50,10 +56,20 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+
+        val db = BirdDatabase.get(this)
+
+        birds = db.newBirdDao().getAll()
+
+        recyclerView.adapter = BirdListAdapter(birds)
+
     }
+
 
     private fun openAddBird() {
         val intent = Intent(this, AddBirdActivity::class.java)
         startActivity(intent)
     }
+
+
 }

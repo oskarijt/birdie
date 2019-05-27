@@ -9,13 +9,13 @@ data class BirdModel(
 
     @PrimaryKey(autoGenerate = true) val uuid: Long,
 
-    val species: String,
-    val notes: String,
-    val rarity: Int,
+    var species: String,
+    var notes: String?,
+    var rarity: String,
     var location: String?,
-    var caughtTimestamp: Long?) {
+    var spotted_at: Long?) {
 
     fun getBirdSpotDate(): Date {
-        return Date(caughtTimestamp ?: 12345)
+        return Date(spotted_at ?: 12345)
     }
 }

@@ -3,6 +3,7 @@
     <string name="title_recent">Recent</string>
     <string name="title_alphabetical">Alphabetical</string>
     <string name="title_rarity">Rarity</string>
+    <string name="dialog_insert_species">Species cannot be empty</string>
     <string name="input_bird_info">Input bird info</string>
     <string name="species">Species</string>
     <string name="notes">Notes</string>
