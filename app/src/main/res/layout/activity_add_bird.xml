@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="16dp">
+
+    <TextView
+            android:id="@+id/contact_form_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/input_bird_info"
+            android:textSize="40sp"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <EditText
+                android:id="@+id/txtSpecies"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:hint="@string/species"
+                android:inputType="textPersonName"
+                android:layout_weight="60"/>
+
+        <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinnerRarity"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:spinnerMode="dropdown"
+                android:prompt="@string/title_rarity"
+                android:layout_weight="40"/>
+
+    </LinearLayout>
+
+    <EditText
+            android:id="@+id/txtNotes"
+            android:layout_width="fill_parent"
+            android:layout_height="150dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:gravity="top"
+            android:hint="@string/notes"
+            android:fitsSystemWindows="true"
+            android:breakStrategy="balanced"
+            android:inputType="textMultiLine"
+            android:singleLine="false"
+            android:padding="5dp" />
+
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/colorPrimaryDark"
+            android:elevation="4dp"
+            android:paddingLeft="70dp"
+            android:paddingRight="70dp"
+            android:text="@string/save_as_new_bird"
+            android:textColor="#fff" />
+</LinearLayout>

@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Watcher</string>
+    <string name="title_recent">Recent</string>
+    <string name="title_alphabetical">Alphabetical</string>
+    <string name="title_rarity">Rarity</string>
+    <string name="input_bird_info">Input bird info</string>
+    <string name="species">Species</string>
+    <string name="notes">Notes</string>
+    <string name="save_as_new_bird">Save as new bird</string>
+
+    <string-array name="bird_rarities">
+        <item>Common</item>
+        <item>Uncommon</item>
+        <item>Rare</item>
+        <item>Ultra Rare</item>
+    </string-array>
+</resources>
