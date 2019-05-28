@@ -67,4 +67,17 @@
             android:paddingRight="70dp"
             android:text="@string/save_as_new_bird"
             android:textColor="#fff" />
+
+    <Button
+            android:id="@+id/btnCancel"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/colorPrimaryDark"
+            android:elevation="4dp"
+            android:paddingLeft="105dp"
+            android:paddingRight="105dp"
+            android:text="@string/cancel"
+            android:textColor="#fff"/>
 </LinearLayout>

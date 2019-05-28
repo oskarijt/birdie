@@ -1,13 +1,14 @@
 package com.oskarijt.myapplication
 
+import android.icu.text.SimpleDateFormat
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 
-class BirdListAdapter(val birdList: LiveData<List<BirdModel>>) : RecyclerView.Adapter<BirdListAdapter.ViewHolder>() {
+class BirdListAdapter(private val birdList: List<BirdModel>) : RecyclerView.Adapter<BirdListAdapter.ViewHolder>() {
 
     //this method is returning the view for each item in the list
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -25,19 +26,23 @@ class BirdListAdapter(val birdList: LiveData<List<BirdModel>>) : RecyclerView.Ad
         return birdList.size
     }
 
-    //the class is hodling the list view
+    //the class is holding the list view
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bindItems(bird: BirdModel) {
+            val sdf = SimpleDateFormat("dd.MM.yyyy', 'HH:mm'")
+
             val txtSpecies = itemView.findViewById(R.id.textViewSpecies) as TextView
             val txtRarity  = itemView.findViewById(R.id.textViewRarity) as TextView
             val txtNotes = itemView.findViewById(R.id.textViewNotes) as TextView
             val txtDate = itemView.findViewById(R.id.textViewDate) as TextView
 
+            Log.d("TAG", bird.species)
+
             txtSpecies.text = bird.species
             txtRarity.text = bird.rarity
             txtNotes.text = bird.notes
-            txtDate.text = bird.spotted_at.toString()
+            txtDate.text = sdf.format(bird.spotted_at).toString()
         }
     }
 }

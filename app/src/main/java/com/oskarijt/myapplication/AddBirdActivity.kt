@@ -29,7 +29,11 @@ class AddBirdActivity : Activity() {
             spinner.adapter = adapter }
 
         btnSaveBird.setOnClickListener {
-                saveBird()
+            saveBird()
+        }
+
+        btnCancel.setOnClickListener {
+            cancel()
         }
     }
 
@@ -37,14 +41,14 @@ class AddBirdActivity : Activity() {
 
         newBird = BirdModel(
             0,
-            txtSpecies.toString(),
-            txtNotes.toString(),
+            txtSpecies.text.toString(),
+            txtNotes.text.toString(),
             spinnerRarity.selectedItem.toString(),
             null,
             Date().time)
 
         persistNewBird(newBird!!)
-
+        finish()
     }
 
     // Persists the caught fish into database using AsyncTask run in a worker thread
@@ -54,5 +58,11 @@ class AddBirdActivity : Activity() {
 
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun cancel() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

@@ -2,32 +2,45 @@ package com.oskarijt.myapplication
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LiveData
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
-
+import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
 
-
     private lateinit var recyclerView: RecyclerView
-    private var birds : LiveData<List<BirdModel>> ? = null
+    private lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var birdListAdapter : BirdListAdapter
+    private lateinit var birds : List<BirdModel>
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_recent -> {
+                val sortedBirds = ArrayList(birds)
+                sortedBirds.sortBy { it.spotted_at }
+                birds = sortedBirds.reversed().toList()
+                recyclerView.adapter = BirdListAdapter(birds)
 
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_alphabetical -> {
+                val sortedBirds = ArrayList(birds)
+                sortedBirds.sortBy { it.species }
+                birds = sortedBirds.toList()
+                recyclerView.adapter = BirdListAdapter(birds)
 
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_rarity -> {
+                val sortedBirds = ArrayList(birds)
+                sortedBirds.sortBy { it.rarity }
+                birds = sortedBirds.reversed().toList()
+                recyclerView.adapter = BirdListAdapter(birds)
 
                 return@OnNavigationItemSelectedListener true
             }
@@ -59,17 +72,19 @@ class MainActivity : AppCompatActivity() {
 
         val db = BirdDatabase.get(this)
 
-        birds = db.newBirdDao().getAll()
+        thread(start = true) {
+            birds = db.newBirdDao().getAll()
+            recyclerView = findViewById(R.id.listBird)
+            linearLayoutManager = LinearLayoutManager(this)
+            recyclerView.layoutManager = linearLayoutManager
+            birdListAdapter = BirdListAdapter(birds.reversed())
+            recyclerView.adapter = birdListAdapter
 
-        recyclerView.adapter = BirdListAdapter(birds)
-
+        }
     }
-
 
     private fun openAddBird() {
         val intent = Intent(this, AddBirdActivity::class.java)
         startActivity(intent)
     }
-
-
 }

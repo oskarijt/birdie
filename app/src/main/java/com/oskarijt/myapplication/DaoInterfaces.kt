@@ -12,6 +12,6 @@ interface DaoInterfaces {
     fun insert(bird: BirdModel)
 
     @Query("SELECT * FROM BirdModel")
-    fun getAll(): LiveData<List<BirdModel>>
+    fun getAll(): List<BirdModel>
 
 }

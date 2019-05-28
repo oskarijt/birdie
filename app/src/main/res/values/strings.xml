@@ -8,11 +8,13 @@
     <string name="species">Species</string>
     <string name="notes">Notes</string>
     <string name="save_as_new_bird">Save as new bird</string>
+    <string name="cancel">Cancel</string>
 
     <string-array name="bird_rarities">
-        <item>Common</item>
-        <item>Uncommon</item>
-        <item>Rare</item>
-        <item>Ultra Rare</item>
+        <item>1. Common</item>
+        <item>2. Uncommon</item>
+        <item>3. Rare</item>
+        <item>4. Ultra Rare</item>
+        <item>4. Legendary</item>
     </string-array>
 </resources>
