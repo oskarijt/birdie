@@ -36,12 +36,14 @@ class BirdListAdapter(private val birdList: List<BirdModel>) : RecyclerView.Adap
             val txtRarity  = itemView.findViewById(R.id.textViewRarity) as TextView
             val txtNotes = itemView.findViewById(R.id.textViewNotes) as TextView
             val txtDate = itemView.findViewById(R.id.textViewDate) as TextView
-
-            Log.d("TAG", bird.species)
+            val txtLat = itemView.findViewById(R.id.listLatitude) as TextView
+            val txtLon = itemView.findViewById(R.id.listLongitude) as TextView
 
             txtSpecies.text = bird.species
             txtRarity.text = bird.rarity
             txtNotes.text = bird.notes
+            txtLat.text = "Lat: " + bird.lat
+            txtLon.text = "Lon: " + bird.lon
             txtDate.text = sdf.format(bird.spotted_at).toString()
         }
     }

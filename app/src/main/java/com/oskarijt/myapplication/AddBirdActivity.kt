@@ -2,7 +2,11 @@ package com.oskarijt.myapplication
 
 import android.app.Activity
 import android.content.Intent
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import com.oskarijt.myapplication.utils.PersistNewBirdAsyncTask
@@ -13,12 +17,23 @@ class AddBirdActivity : Activity() {
 
     // The bird to be saved is stored in this variable
     private var newBird: BirdModel? = null
+    private var locationManager : LocationManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_bird)
 
         val spinner: Spinner = this.findViewById(R.id.spinnerRarity)
+
+        // Create persistent LocationManager reference
+        locationManager = getSystemService(LOCATION_SERVICE) as LocationManager?
+
+        try {
+            // Request location updates
+            locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0L, 0f, locationListener);
+        } catch(ex: SecurityException) {
+            Log.d("myTag", "No location available")
+        }
 
         ArrayAdapter.createFromResource(
             this,
@@ -44,7 +59,8 @@ class AddBirdActivity : Activity() {
             txtSpecies.text.toString(),
             txtNotes.text.toString(),
             spinnerRarity.selectedItem.toString(),
-            null,
+            txtLatitude.text.toString(),
+            txtLongitude.text.toString(),
             Date().time)
 
         persistNewBird(newBird!!)
@@ -64,5 +80,16 @@ class AddBirdActivity : Activity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    //define the listener
+    private val locationListener: LocationListener = object : LocationListener {
+        override fun onLocationChanged(location: Location) {
+            txtLatitude.text = location.latitude.toString()
+            txtLongitude.text = location.longitude.toString()
+        }
+        override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
+        override fun onProviderEnabled(provider: String) {}
+        override fun onProviderDisabled(provider: String) {}
     }
 }

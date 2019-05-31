@@ -1,12 +1,15 @@
 package com.oskarijt.myapplication
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlin.concurrent.thread
@@ -68,6 +71,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
+        checkPermissions()
+
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
         val db = BirdDatabase.get(this)
@@ -86,5 +91,11 @@ class MainActivity : AppCompatActivity() {
     private fun openAddBird() {
         val intent = Intent(this, AddBirdActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun checkPermissions() {
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 0)
+        }
     }
 }

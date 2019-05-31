@@ -12,7 +12,8 @@ data class BirdModel(
     var species: String,
     var notes: String?,
     var rarity: String,
-    var location: String?,
+    var lat: String?,
+    var lon: String?,
     var spotted_at: Long?) {
 
     fun getBirdSpotDate(): Date {

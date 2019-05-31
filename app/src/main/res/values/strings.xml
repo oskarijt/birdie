@@ -9,6 +9,8 @@
     <string name="notes">Notes</string>
     <string name="save_as_new_bird">Save as new bird</string>
     <string name="cancel">Cancel</string>
+    <string name="latitude">Latitude:</string>
+    <string name="longitude">Longitude:</string>
 
     <string-array name="bird_rarities">
         <item>1. Common</item>
